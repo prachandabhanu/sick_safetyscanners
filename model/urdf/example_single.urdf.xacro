@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<robot xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+  xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+  xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+  xmlns:xacro="http://ros.org/wiki/xacro"
+  name="sick_scan">
+
+  <xacro:include filename="$(find sick_safetyscanners)/model/urdf/lms_1xx.urdf.xacro" />
+  
+  <link name="world" />
+
+  <joint name="world_sick_safetyscanners_front_joint" type="fixed">
+    <parent link="world" />
+    <child link="sick_safetyscanners_mount_link" />
+    <origin xyz="0 0 0.25" rpy="0 0 0" />
+  </joint>
+
+  <xacro:sick_lms_1xx name="sick_safetyscanners" ros_topic="scan" />
+</robot>
