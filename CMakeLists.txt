@@ -221,6 +221,11 @@ target_link_libraries(${PROJECT_NAME}_node
   ${catkin_LIBRARIES}
 )
 
+## Simple subscriber
+add_executable(simple_subscriber_node src/simple_subscriber.cpp)
+add_dependencies(simple_subscriber_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(simple_subscriber_node ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############
