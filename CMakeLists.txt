@@ -226,6 +226,10 @@ add_executable(simple_subscriber_node src/simple_subscriber.cpp)
 add_dependencies(simple_subscriber_node ${catkin_EXPORTED_TARGETS})
 target_link_libraries(simple_subscriber_node ${catkin_LIBRARIES})
 
+add_executable(object_detection_node src/object_detection.cpp)
+add_dependencies(object_detection_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(object_detection_node ${catkin_LIBRARIES})
+
 #############
 ## Install ##
 #############
