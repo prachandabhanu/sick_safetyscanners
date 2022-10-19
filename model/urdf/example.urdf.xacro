@@ -5,6 +5,8 @@
   xmlns:xacro="http://ros.org/wiki/xacro"
   name="sick_scan">
 
+  <xacro:arg name="topic" default="scan" />
+
   <xacro:include filename="$(find sick_safetyscanners)/model/urdf/lms_1xx.urdf.xacro" />
   
   <link name="world" />
@@ -21,6 +23,6 @@
     <origin xyz="-0.5 0.3 0.25" rpy="0 0 2.356" />
   </joint>
 
-  <xacro:sick_lms_1xx name="sick_safetyscanners_front" ros_topic="scan" />
-  <xacro:sick_lms_1xx name="sick_safetyscanners_rear" ros_topic="scan" />
+  <xacro:sick_lms_1xx name="sick_safetyscanners_front" ros_topic="$(arg topic)" />
+  <xacro:sick_lms_1xx name="sick_safetyscanners_rear" ros_topic="$(arg topic)" />
 </robot>

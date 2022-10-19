@@ -10,9 +10,9 @@ class ObjectDetection
     public:
         ObjectDetection(const ros::NodeHandle nh): _nh(nh)
         {
-            _subscriber_front = _nh.subscribe<sensor_msgs::LaserScan>("/sick_safetyscanners_front/scan", 10, \
+            _subscriber_front = _nh.subscribe<sensor_msgs::LaserScan>("/sick_safetyscanners_front/laser_scan", 10, \
 										boost::bind(&ObjectDetection::callback_front, this, _1));
-            _subscriber_rear = _nh.subscribe<sensor_msgs::LaserScan>("/sick_safetyscanners_rear/scan", 10, \
+            _subscriber_rear = _nh.subscribe<sensor_msgs::LaserScan>("/sick_safetyscanners_rear/laser_scan", 10, \
 										boost::bind(&ObjectDetection::callback_rear, this, _1));
             
             _publisher = _nh.advertise<std_msgs::String>("/collision_object_info", 1000);
@@ -20,11 +20,14 @@ class ObjectDetection
 
         void callback_front(const sensor_msgs::LaserScan::ConstPtr msg)
         {
+            ROS_INFO("Received Front Scan info: \n Frame ID: %s, \n Max angle: %f, \n Min angle: %f, \
+					\n Angle increment: %f, \n Max range: %f, \n Min range: %f", \
+					msg->header.frame_id.c_str(), msg->angle_max, msg->angle_min, msg->angle_increment,  \
+					msg->range_max, msg->range_min);
             int i = 0;
             double dist, angle;
             for (auto range: msg->ranges)
             {
-                i ++;
                 if (range < 10.0)
                 {
                     dist = range;
@@ -34,6 +37,7 @@ class ObjectDetection
                     dist = 0.0;
                     angle = 0.0;
                 }
+                i ++;
             }
 
             if(dist != 0)
@@ -51,11 +55,15 @@ class ObjectDetection
 
         void callback_rear(const sensor_msgs::LaserScan::ConstPtr msg)
         {
+            ROS_INFO("Received Rear Scan info: \n Frame ID: %s, \n Max angle: %f, \n Min angle: %f, \
+					\n Angle increment: %f, \n Max range: %f, \n Min range: %f", \
+					msg->header.frame_id.c_str(), msg->angle_max, msg->angle_min, msg->angle_increment,  \
+					msg->range_max, msg->range_min);
+
             int i = 0;
             double dist, angle;
             for (auto range: msg->ranges)
             {
-                i ++;
                 if (range < 10.0)
                 {
                     dist = range;
@@ -65,6 +73,7 @@ class ObjectDetection
                     dist = 0.0;
                     angle = 0.0;
                 }
+                i ++;
             }
 
             if(dist != 0)

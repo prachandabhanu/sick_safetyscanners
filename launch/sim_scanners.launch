@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <launch>
+  <arg name="topic"    default="scan" doc="Lasser Scan topic name" />
 
   <param name="robot_description"
-         command="xacro $(find sick_safetyscanners)/model/urdf/example.urdf.xacro">
+         command="xacro $(find sick_safetyscanners)/model/urdf/example.urdf.xacro topic:=$(arg topic)">
   </param>
 
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />

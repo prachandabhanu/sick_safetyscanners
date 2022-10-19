@@ -222,13 +222,13 @@ target_link_libraries(${PROJECT_NAME}_node
 )
 
 ## Simple subscriber
-add_executable(simple_subscriber_node src/simple_subscriber.cpp)
-add_dependencies(simple_subscriber_node ${catkin_EXPORTED_TARGETS})
-target_link_libraries(simple_subscriber_node ${catkin_LIBRARIES})
+add_executable(sick_subscriber_node src/simple_subscriber.cpp)
+add_dependencies(sick_subscriber_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(sick_subscriber_node ${catkin_LIBRARIES})
 
-add_executable(object_detection_node src/object_detection.cpp)
-add_dependencies(object_detection_node ${catkin_EXPORTED_TARGETS})
-target_link_libraries(object_detection_node ${catkin_LIBRARIES})
+add_executable(laser_scan_subscriber_node src/object_detection.cpp)
+add_dependencies(laser_scan_subscriber_node ${catkin_EXPORTED_TARGETS})
+target_link_libraries(laser_scan_subscriber_node ${catkin_LIBRARIES})
 
 #############
 ## Install ##
